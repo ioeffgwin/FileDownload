@@ -304,6 +304,7 @@ def checkCardLoc():
         txt1_text.set('No Path available to copy files to.')
         txt1.update()
         chk1=False
+    
     else:
         txt1_text.set('Destination path is: ' + PATH_DEST)
         txt1.update()
