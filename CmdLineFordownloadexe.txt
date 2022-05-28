@@ -1,0 +1,10 @@
+CD C:\Users\jeffv\OneDrive\Documents\py_VidDownload
+
+pyinstaller --noconsole --windowed --add-data "C:\Python310\Lib\site-packages\customtkinter;customtkinter" --icon hnet.com-image.ico --add-binary logo_1a.png;. FileDownloadInterface.pyw
+
+https://github.com/TomSchimansky/CustomTkinter
+
+
+
+
+https://github.com/TomSchimansky/CustomTkinter/wiki/Packaging#windows-pyinstaller-auto-py-to-exe
