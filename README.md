@@ -1,13 +1,21 @@
 # FileDownload
-This is for downloading video files fromn cards to PC
-It renames files to yyyy_mm_dd  format and stores that file has been downloaded
+This is for downloading video files (and associated sound files) from cards to the PC.
+
+It renames files to yyyy_mm_dd  format and stores details of which file have previously been downloaded, to avoid repeats if you don't clear the card. 
+
+Files are stored at the chosen root under yyyy \ yyyy_mm_dd \ yyyy_mm_dd_HHMMss naming with original filetype as extension. _The original files are not touched, just copied_.
 
 To install on a windows PC copy folder [https://github.com/ioeffgwin/FileDownload/dist/FileDownloadInterface](https://github.com/ioeffgwin/FileDownload/tree/master/dist/FileDownloadInterface) to somewhere like C:\Program Files.
+
 Make a shortcut to __FileDownloadInterface.exe__. (Yes, I should have made the exe name more catchy!). Run that and it should all work.
+
+
+### Changing Defaults
+If you don't like the default locations for source and destinations - or there is a file type you want to include - these can be changed by going to text files at C:\Users\<username>\AppData\Local\FileDownloads and adding or altering the contents of the relevant files.
 
 _Don't mess with the content of the files at C:\Users\<username>\AppData\Local\FileDownloads unless you are sure you know what you are doing._
 
-__.FileDownloads.d__ is a SQLite database recording the files that have already been downloaded. If you delete it files may get downloaded twice if you haven't deleted them from the card. Their unique test is by file date, time and size.
+__.FileDownloads.d__ is a SQLite database recording the files that have already been downloaded. If you delete it files may get downloaded twice if you haven't deleted them from the card. Their unique test is by file date, time and size. _If you really want to, you can read this file by downloading SQLiteStudio._
 
 Details of default values for folder locations and allowed file types are listed below:
 These are created at first start (or again on next start if deleted) with default values set by the developer in them. One item to each line. _If you delete all the contents, the file will recreate with the default values._
