@@ -1,10 +1,9 @@
-CD C:\Users\jeffv\OneDrive\Documents\py_VidDownload
+#Run these two commands to create exe file (add relevant <username>)
+CD C:\Users\<username>\OneDrive\Documents\py_VidDownload
 
 pyinstaller --noconsole --windowed --add-data "C:\Python310\Lib\site-packages\customtkinter;customtkinter" --icon hnet.com-image.ico --add-binary logo_1a.png;. FileDownloadInterface.pyw
 
+#More details at: 
 https://github.com/TomSchimansky/CustomTkinter
-
-
-
 
 https://github.com/TomSchimansky/CustomTkinter/wiki/Packaging#windows-pyinstaller-auto-py-to-exe
