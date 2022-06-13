@@ -12,5 +12,7 @@ Details of default values for folder locations and allowed file types are listed
 These are created at first start (or again on next start if deleted) with default values set by the developer in them. One item to each line. _If you delete all the contents, the file will recreate with the default values._
 
 __AllowedFiles.txt__ is the file extension for files types to be included. This includes regular video and sound formats. Code is case sensitive hence the upper and lower case. Any other files in the source folder will not appear in the Treeview or Download all option. Make sure to add '.' before extension
+
 __LocationDestination.txt__ - the default path root to send your files to. On windows the would be C:\users\<username>\Videos, but change or add if another path is the usual choice
+
 __LocationSource.txt__ - defaults as either F:\DCIM or G:\DCIM  but add another if there is another regularly used path
