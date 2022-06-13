@@ -2,7 +2,7 @@
 This is for downloading video files fromn cards to PC
 It renames files to yyyy_mm_dd  format and stores that file has been downloaded
 
-To install on a windows PC copy folder https://github.com/ioeffgwin/FileDownload/dist/FileDownloadInterface to somewhere like C:\Program Files.
+To install on a windows PC copy folder [https://github.com/ioeffgwin/FileDownload/dist/FileDownloadInterface](https://github.com/ioeffgwin/FileDownload/tree/master/dist/FileDownloadInterface) to somewhere like C:\Program Files.
 Make a shortcut to __FileDownloadInterface.exe__. (Yes, I should have made the exe name more catchy!). Run that and it should all work.
 
 _Don't mess with the content of the files at C:\Users\<username>\AppData\Local\FileDownloads unless you are sure you know what you are doing._
