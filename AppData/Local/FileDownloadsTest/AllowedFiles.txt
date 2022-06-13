@@ -1,0 +1,13 @@
+.mp4
+.mov
+.aac
+.svg
+.avi
+.3gp
+.wav
+.MP4
+.MOV
+.AAC
+.SVG
+.AVI
+.WAV
