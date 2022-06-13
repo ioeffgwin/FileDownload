@@ -25,3 +25,20 @@ __AllowedFiles.txt__ is the file extension for files types to be included. This 
 __LocationDestination.txt__ - the default path root to send your files to. On windows the would be C:\users\<username>\Videos, but change or add if another path is the usual choice
 
 __LocationSource.txt__ - defaults as either F:\DCIM or G:\DCIM  but add another if there is another regularly used path
+
+### Code
+main class to launch app: _FileDownloadInterface.pyw_
+
+calls following classes: _FileDownloadFileMeta.py, FileDownloadDBConn.py, FileDownloadConstants.py_
+
+also _need hhnet.com-image.ico_ for app icon
+
+### Build
+#Run these two commands at cmd prompt to create exe file (add relevant <username>)
+
+CD C:\Users\<username>\OneDrive\Documents\py_VidDownload
+
+pyinstaller --noconsole --windowed --add-data "C:\Python310\Lib\site-packages\customtkinter;customtkinter" --icon hnet.com-image.ico --add-binary logo_1a.png;. FileDownloadInterface.pyw
+
+_You might need to change the path for your customtkinter installation to suit your local python installation_
+
