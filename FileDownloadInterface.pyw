@@ -75,10 +75,10 @@ ctk.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 default_font = tkFont.nametofont("TkDefaultFont")
 default_font.configure(size=12)
 
-#decided not to have label in row 0 but keep this in case change mind
-#lbl = ctk.CTkLabel(window, text="Download video files") #, font=("Consolas", 18))
-#lbl.config(anchor='e')
-#lbl.grid(column=0, row=0, columnspan=5, sticky='w', padx=10)
+#add some version control - need to rememeber to update this!
+lbl = ctk.CTkLabel(window, text="ver 2022_06_13_b")
+lbl.config(anchor='e')
+lbl.grid(column=0, row=0, columnspan=5, sticky='e', padx=1, pady=1, ipadx=1, ipady=1)
 
 #create text for labels
 lbl1_text = tkinter.StringVar()
