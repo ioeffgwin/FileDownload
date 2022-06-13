@@ -89,7 +89,7 @@ lbl1_text.set('Select the source and destination of your files if you want diffe
 lbl2_text = tkinter.StringVar()
 lbl2_text.set(dbchk.dbmsg)
 txt1_text = tkinter.StringVar()
-txt1_text.set('Destination path is: ' + PATH_DEST)
+txt1_text.set(PATH_DEST)
 txt2_text = tkinter.StringVar()
 txt2_text.set(PATH_CARD)
 
@@ -300,15 +300,30 @@ def checkCardLoc():
     global txt2
 
     # check to see if default PATH_DEST is there
-    if os.path.exists(PATH_DEST) == False:
-        txt1_text.set('No Path available to copy files to.')
-        txt1.update()
-        chk1=False
-    
+    if isinstance(PATH_DEST,str):
+        if os.path.exists(PATH_DEST) == False:
+            txt1_text.set('No Path available to copy files to.')
+            txt1.update()
+            chk1=False
+        
+        else:
+            txt1_text.set('Destination path is: ' + PATH_DEST)
+            txt1.update()
+            chk1=True
     else:
-        txt1_text.set('Destination path is: ' + PATH_DEST)
-        txt1.update()
-        chk1=True
+        for dest in PATH_DEST:
+            if os.path.exists(dest):
+                newPath_Dest = dest
+                txt1_text.set('Destination path is: ' + newPath_Dest)
+                txt1.update()
+                PATH_DEST = newPath_Dest
+                chk1=True
+                break
+        else:
+            txt1_text.set('No Path available to copy files to.')
+            txt1.update()
+            chk1=False
+
 
     # check to see if default PATH_CARD is there
     if isinstance(PATH_CARD,str):
