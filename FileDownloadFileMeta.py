@@ -14,8 +14,9 @@ class FileDownloadFileMeta :
 
     def __init__(self, path_to_file):
         #######################################################
-        #
-        #
+        #Get metadata from source files to be used to rename 
+        #   and store information in database
+        #   Get date to be used in new name and build string to be used
         #######################################################
 
         path_dest = FileDownloadConstants().PATH_DEST
@@ -60,7 +61,7 @@ class FileDownloadFileMeta :
 
     def updateDB(self):
         #######################################################
-        #  
+        #  Update the database with details of files being downloaded
         #
         #######################################################
         mydb = DBConn(db_name=FileDownloadConstants().DB_NAME, db_path=FileDownloadConstants().DB_PATH)
@@ -71,6 +72,7 @@ class FileDownloadFileMeta :
     def displayFileSize(self,filesize):
         #######################################################
         # return the file size as string with MB, GB as appropriate
+        #  use in treeview
         #######################################################
         ans = ""
         if filesize < 1024 :
@@ -88,7 +90,7 @@ class FileDownloadFileMeta :
 
     def copyFileToNew(self):
         #######################################################
-        #  
+        #  Copy file from source to new location with new name
         #
         #######################################################
         try:

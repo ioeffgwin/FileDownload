@@ -31,12 +31,14 @@ from FileDownloadFileMeta import FileDownloadFileMeta as FileMeta
 
 
 ####################################################################
-#
-#
-#
-#
-#
-#
+# Main class to launch and set up interface for this app
+# Check source and destination locations are valid
+#   - either at start with default or with chosen location
+# Populate tree with relevant files from source
+# View file if double clicked (and VNC installed)
+# Download selected files or Download all files
+# Update database
+# Reload tree to show remaining undownloaded files
 ####################################################################
 
 # create the window
@@ -44,11 +46,6 @@ window = ctk.CTk()
 
 
 
-# constants can changed for testing so as not to mess with live data
-# constants.setDBName(constants, newValue='test.db')
-# constants.addPathCard(constants, newValue=r'D:\Users\Jeffv\Google Drive\Dismal')
-# constants.setPathDest(constants, newValue=r'D:\temp')
-# constants.setDBPath(constants,newValue=r'AppData\Local\FileDownloadsTest')
 
 # check if database available
 dbchk = dbconn(db_name=constants().DB_NAME, db_path=constants().DB_PATH)

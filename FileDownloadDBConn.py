@@ -3,10 +3,10 @@ from datetime import datetime
 import os
 
 ####################################################################
-#
-#
-#
-#
+# checks if database that stores details of downloaded files exists
+# if not, creates database and table
+# Check if file previously downloaded
+# Update when file dowwnloaded
 #
 #
 ####################################################################
@@ -14,6 +14,7 @@ import os
 
 class FileDownloadDBConn:
     
+    #create variables to return messages to interface
     dbmsg = ''
     dbmsgUpdate = ''
 
