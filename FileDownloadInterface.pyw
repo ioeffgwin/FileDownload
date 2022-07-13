@@ -147,140 +147,6 @@ btn3 = ctk.CTkButton()
 btn4 = ctk.CTkButton()
 btn5 = ctk.CTkButton()
 
-#add methods relating to buttons and treeview
-def populateTree(path_to_files):
-    #######################################################
-    # populate treeview with data from FILE_CARD
-    # 
-    #######################################################
-    for i in myTree.get_children():
-        myTree.delete(i)
-
-    treeData = []
-    for root, dirs, files in os.walk(path_to_files):
-        #for dir in dirs:
-        for file in files:
-            pathname = os.path.join(root,file)
-            filedets = FileMeta(pathname)
-            lbl2_text.set(f'Checking {pathname}...')
-            lbl2.update()
-            if filedets.FileExt in FILE_TYPES and filedets.alreadyinDB==False: #only look at the filetypes we want to download
-                #download file to PATH_DEST
-                treeData.append((filedets.FileName ,filedets.sizedesc,filedets.FileDirName,filedets.FileDate,filedets.filePath))
-    for treeDat in treeData:
-        myTree.insert('',END, values=treeDat)
-    lbl2_text.set('  ')
-    lbl2.update()
-
-
-def downloadCheckedFiles():
-    #######################################################
-    # download selected files checked in treeview
-    #
-    #######################################################
-    timestart = time.process_time()# check how long it takes to run
-    global lbl1
-    global lbl2
-    chkFiles = myTree.get_checked()
-    for chkFile in chkFiles:
-        myFile = myTree.item(chkFile)
-        pathname = myFile['values'][4]
-        #get the file properties
-        filedets = FileMeta(pathname)
-        lbl1_text.set(f'Checking {pathname}...')
-        lbl1.update()
-        #download file to PATH_DEST
-        lbl1_text.set(f'File {pathname} copying to {filedets.new_fileName}')
-        lbl1.update()
-        if filedets.copyFileToNew():    #successfule copying = True
-            lbl2_text.set(filedets.updateDBmsg)
-            lbl2.update()
-            # update terminal
-            lbl1_text.set(f'File {pathname} copied to {filedets.new_fileName}')
-            lbl1.update()
-            #Update DB with details of files copied
-            filedets.updateDB()
-            # update terminal
-            lbl2_text.set(filedets.updateDBmsg)
-            lbl2.update()
-        else:
-            lbl2_text.set(f'File {pathname} copy failed!')
-            lbl2.update()
-
-    for i in myTree.get_children():
-        myTree.delete(i)
-    populateTree(PATH_CARD)
-    lbl1_text.set('  ')
-    lbl1.update()
-
-    # check how long it takes to run - delete when testing finished
-    lbl2_text.set(f'Download finished in {time.process_time()-timestart} seconds.')
-    lbl2.update()
-
-
-
-
-def downloadAllFiles(path_to_files):
-    #######################################################
-    # iterate through source files and check against DB
-    # If of correct type and not previously downloaded, 
-    #   copy to new location and rename to yyyy\mm\yyyy_mm_dd_hhmmssfff
-    #######################################################
-    timestart = time.process_time()# check how long it takes to run
-    global lbl1
-    global lbl2
-    for root, dirs, files in os.walk(path_to_files):
-        #for dir in dirs:
-        for file in files:
-            pathname = os.path.join(root,file)
-            filedets = FileMeta(pathname)
-            lbl1_text.set(f'Checking {pathname}...')
-            lbl1.update()
-            #window.after(300) #slow down so that user can see some progress ;-)
-            if filedets.FileExt in FILE_TYPES and filedets.alreadyinDB==False: #only look at the filetypes we want to download
-                #download file to PATH_DEST
-                # create new folders if needed
-                os.makedirs(os.path.dirname(filedets.dest_fpath), exist_ok=True)
-                #update terminal
-                lbl1_text.set(f'File {pathname} copying to {filedets.new_fileName}')
-                lbl1.update()
-                if filedets.copyFileToNew():    #successfule copying = True
-                    lbl2_text.set(filedets.updateDBmsg)
-                    lbl2.update()
-                    # update terminal
-                    lbl1_text.set(f'File {pathname} copied to {filedets.new_fileName}')
-                    lbl1.update()
-                    #Update DB with details of files copied
-                    filedets.updateDB()
-                    lbl2_text.set(filedets.updateDBmsg)
-                    lbl2.update()
-                else:
-                    lbl2_text.set(f'File {pathname} copy failed!')
-                    lbl2.update()
-
-    # update the tree
-    populateTree(path_to_files)
-    lbl1_text.set('  ')
-    lbl1.update()
-
-    # check how long it takes to run - delete when testing finished
-    lbl2_text.set(f'Download finished in {time.process_time()-timestart} seconds.')
-    lbl2.update()
-
-def treeDoubleClick(self):
-    #######################################################
-    # opens video file in VLC when double clicked in the treeview
-    # JV 19/5/22
-    #######################################################
-    #need to get the slashes in the right direction to pass the string to open file in VLC
-    fileitem = myTree.item(myTree.selection()[0])
-    filetoopen = fileitem['values'][4]
-    filetoopen = filetoopen.replace('//','/')
-    filetoopen = filetoopen.replace('/', '\\')
-    #print(r'C:\Program Files\VideoLAN\VLC\vlc.exe ' + filetoopen)
-    subprocess.run(r'"C:\Program Files\VideoLAN\VLC\vlc.exe" "' + filetoopen +'"', check=True)
-
-
 def checkCardLoc():
     #######################################################
     # Check that the file start and finish locations are valid
@@ -349,12 +215,146 @@ def checkCardLoc():
     if chk1 and chk2:
         btn3.config(state='normal')
         btn4.config(state='normal')
-        populateTree(PATH_CARD)
+        populateTree(PATH_CARD, PATH_DEST)
         lbl2_text.set(dbchk.dbmsg)
         lbl2.update()
     else:
         btn3.config(state='disabled')
         btn4.config(state='disabled')
+
+#add methods relating to buttons and treeview
+def populateTree(path_to_files,path_dest):
+    #######################################################
+    # populate treeview with data from FILE_CARD
+    # 
+    #######################################################
+    for i in myTree.get_children():
+        myTree.delete(i)
+
+    treeData = []
+    for root, dirs, files in os.walk(path_to_files):
+        #for dir in dirs:
+        for file in files:
+            pathname = os.path.join(root,file)
+            filedets = FileMeta(pathname, path_dest)
+            lbl2_text.set(f'Checking {pathname}...')
+            lbl2.update()
+            if filedets.FileExt in FILE_TYPES and filedets.alreadyinDB==False: #only look at the filetypes we want to download
+                #download file to PATH_DEST
+                treeData.append((filedets.FileName ,filedets.sizedesc,filedets.FileDirName,filedets.FileDate,filedets.filePath))
+    for treeDat in treeData:
+        myTree.insert('',END, values=treeDat)
+    lbl2_text.set('  ')
+    lbl2.update()
+
+
+def downloadCheckedFiles():
+    #######################################################
+    # download selected files checked in treeview
+    #
+    #######################################################
+    timestart = time.process_time()# check how long it takes to run
+    global lbl1
+    global lbl2
+    chkFiles = myTree.get_checked()
+    for chkFile in chkFiles:
+        myFile = myTree.item(chkFile)
+        pathname = myFile['values'][4]
+        #get the file properties
+        filedets = FileMeta(pathname, PATH_DEST)
+        lbl1_text.set(f'Checking {pathname}...')
+        lbl1.update()
+        #download file to PATH_DEST
+        lbl1_text.set(f'File {pathname} copying to {filedets.new_fileName}')
+        lbl1.update()
+        if filedets.copyFileToNew():    #successfule copying = True
+            lbl2_text.set(filedets.updateDBmsg)
+            lbl2.update()
+            # update terminal
+            lbl1_text.set(f'File {pathname} copied to {filedets.new_fileName}')
+            lbl1.update()
+            #Update DB with details of files copied
+            filedets.updateDB()
+            # update terminal
+            lbl2_text.set(filedets.updateDBmsg)
+            lbl2.update()
+        else:
+            lbl2_text.set(f'File {pathname} copy failed!')
+            lbl2.update()
+
+    for i in myTree.get_children():
+        myTree.delete(i)
+    populateTree(PATH_CARD)
+    lbl1_text.set('  ')
+    lbl1.update()
+
+    # check how long it takes to run - delete when testing finished
+    lbl2_text.set(f'Download finished in {time.process_time()-timestart} seconds.')
+    lbl2.update()
+
+
+
+
+def downloadAllFiles(path_to_files):
+    #######################################################
+    # iterate through source files and check against DB
+    # If of correct type and not previously downloaded, 
+    #   copy to new location and rename to yyyy\mm\yyyy_mm_dd_hhmmssfff
+    #######################################################
+    timestart = time.process_time()# check how long it takes to run
+    global lbl1
+    global lbl2
+    for root, dirs, files in os.walk(path_to_files):
+        #for dir in dirs:
+        for file in files:
+            pathname = os.path.join(root,file)
+            filedets = FileMeta(pathname, PATH_DEST)
+            lbl1_text.set(f'Checking {pathname}...')
+            lbl1.update()
+            #window.after(300) #slow down so that user can see some progress ;-)
+            if filedets.FileExt in FILE_TYPES and filedets.alreadyinDB==False: #only look at the filetypes we want to download
+                #download file to PATH_DEST
+                # create new folders if needed
+                os.makedirs(os.path.dirname(filedets.dest_fpath), exist_ok=True)
+                #update terminal
+                lbl1_text.set(f'File {pathname} copying to {filedets.new_fileName}')
+                lbl1.update()
+                if filedets.copyFileToNew():    #successfule copying = True
+                    lbl2_text.set(filedets.updateDBmsg)
+                    lbl2.update()
+                    # update terminal
+                    lbl1_text.set(f'File {pathname} copied to {filedets.new_fileName}')
+                    lbl1.update()
+                    #Update DB with details of files copied
+                    filedets.updateDB()
+                    lbl2_text.set(filedets.updateDBmsg)
+                    lbl2.update()
+                else:
+                    lbl2_text.set(f'File {pathname} copy failed!')
+                    lbl2.update()
+
+    # update the tree
+    populateTree(path_to_files,PATH_DEST)
+    lbl1_text.set('  ')
+    lbl1.update()
+
+    # check how long it takes to run - delete when testing finished
+    lbl2_text.set(f'Download finished in {time.process_time()-timestart} seconds.')
+    lbl2.update()
+
+def treeDoubleClick(self):
+    #######################################################
+    # opens video file in VLC when double clicked in the treeview
+    # JV 19/5/22
+    #######################################################
+    #need to get the slashes in the right direction to pass the string to open file in VLC
+    fileitem = myTree.item(myTree.selection()[0])
+    filetoopen = fileitem['values'][4]
+    filetoopen = filetoopen.replace('//','/')
+    filetoopen = filetoopen.replace('/', '\\')
+    #print(r'C:\Program Files\VideoLAN\VLC\vlc.exe ' + filetoopen)
+    subprocess.run(r'"C:\Program Files\VideoLAN\VLC\vlc.exe" "' + filetoopen +'"', check=True)
+
 
 
 def getCardLoc():

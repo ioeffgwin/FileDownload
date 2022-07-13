@@ -12,14 +12,14 @@ class FileDownloadFileMeta :
     #######################################################
 
 
-    def __init__(self, path_to_file):
+    def __init__(self, path_to_file, path_dest):
         #######################################################
         #Get metadata from source files to be used to rename 
         #   and store information in database
         #   Get date to be used in new name and build string to be used
         #######################################################
 
-        path_dest = FileDownloadConstants().PATH_DEST
+        #path_dest = FileDownloadConstants().PATH_DEST
 
         path = path_to_file # not sure why I created this! (So i didn't have to keeping typing path_to_file)
         self.filePath = path
