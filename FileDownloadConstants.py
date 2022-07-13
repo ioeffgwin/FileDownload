@@ -21,6 +21,8 @@ def getSourceList(file_loc, source_loc):
         my_file = open(path_to_file, "r")
         return my_file.read().splitlines()
     else :
+        from pathlib import Path
+        Path(file_loc).mkdir(parents=True, exist_ok=True) #create filedownloads path if doesn't exist
         my_file = open(path_to_file, "a")
         for element in source_loc:
             my_file.write (element + '\n')

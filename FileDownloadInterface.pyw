@@ -76,7 +76,7 @@ default_font = tkFont.nametofont("TkDefaultFont")
 default_font.configure(size=12)
 
 #add some version control - need to rememeber to update this!
-lbl = ctk.CTkLabel(window, text="ver 2022_07_13a")
+lbl = ctk.CTkLabel(window, text="ver 2022_07_13b")
 lbl.config(anchor='e')
 lbl.grid(column=0, row=0, columnspan=5, sticky='e', padx=1, pady=1, ipadx=1, ipady=1)
 
