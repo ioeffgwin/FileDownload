@@ -3,3 +3,4 @@
 /build/
 .FileDownloads.d
 FileDownloadInterface.spec
+dist/FileDownloadInterface.zip
