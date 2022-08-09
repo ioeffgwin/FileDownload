@@ -5,7 +5,7 @@ It renames files to ```yyyy_mm_dd```  format and stores details of which file ha
 
 Files are stored at the chosen root under ```yyyy \ yyyy_mm_dd \ yyyy_mm_dd_HHMMss``` naming with original filetype as extension. _The original files are not touched, just copied_.
 
-To install on a windows PC copy folder [https://github.com/ioeffgwin/FileDownload/dist/FileDownloadInterface](https://github.com/ioeffgwin/FileDownload/tree/master/dist/FileDownloadInterface) to somewhere like ```C:\Program Files```.
+To install on a windows PC unzip the zipped folder folder [https://github.com/ioeffgwin/FileDownload/FileDownloadInterface.zip](https://github.com/ioeffgwin/FileDownload/tree/master/FileDownloadInterface.zip) to somewhere like ```C:\Program Files```.
 
 Make a shortcut to __FileDownloadInterface.exe__. (Yes, I should have made the exe name more catchy!). Run that and it should all work.
 
