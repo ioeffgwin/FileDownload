@@ -16,7 +16,7 @@
     "text": ["gray12", "gray90"],
     "text_disabled": ["gray60", "gray50"],
     "text_button_disabled": ["gray40", "gray74"],
-    "progressbar": ["#6B6B6B", "gray6"],
+    "progressbar": ["#6B6B6B", "gray0"],
     "progressbar_progress": ["#608BD5", "#395E9C"],
     "progressbar_border": ["gray", "gray"],
     "slider": ["#6B6B6B", "gray6"],
@@ -27,9 +27,16 @@
     "switch_progress": ["#608BD5", "#395E9C"],
     "switch_button": ["gray38", "gray70"],
     "switch_button_hover": ["gray30", "gray90"],
-    "darken_factor": 0.8
+    "optionmenu_button": ["#36719F", "#144870"],
+    "optionmenu_button_hover": ["#27577D", "#203A4F"],
+    "combobox_border": ["gray70", "gray32"],
+    "combobox_button_hover": ["#6E7174", "#7A848D"],
+    "dropdown_color": ["gray90", "gray20"],
+    "dropdown_hover": ["gray75", "gray28"],
+    "dropdown_text": ["gray10", "#DCE4EE"],
+    "scrollbar_button": ["gray55", "gray41"],
+    "scrollbar_button_hover": ["gray40", "gray53"]
   },
-
   "text": {
     "macOS": {
       "font": "SF Display",
@@ -43,7 +50,6 @@
       "font": "Roboto",
       "size": -13
     }
-
   },
   "shape": {
     "button_corner_radius": 8,
@@ -56,7 +62,7 @@
     "entry_border_width": 2,
     "frame_corner_radius": 10,
     "frame_border_width": 0,
-    "label_corner_radius": 8,
+    "label_corner_radius": 0,
     "progressbar_border_width": 0,
     "progressbar_corner_radius": 1000,
     "slider_border_width": 6,
@@ -66,6 +72,8 @@
     "switch_border_width": 3,
     "switch_corner_radius": 1000,
     "switch_button_corner_radius": 1000,
-    "switch_button_length": 0
+    "switch_button_length": 0,
+    "scrollbar_corner_radius": 1000,
+    "scrollbar_border_spacing": 4
   }
 }

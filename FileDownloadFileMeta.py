@@ -48,8 +48,13 @@ class FileDownloadFileMeta :
         t_secs = t_date.strftime('%S')
         t_msecs = t_date.strftime('%f')
 
-        self.dest_fpath = f"{path_dest}\\{t_year}\\{t_year}_{t_month}_{t_day}\\"
-        self.new_fileName = f"{path_dest}\\{t_year}\\{t_year}_{t_month}_{t_day}\\{t_year}_{t_month}_{t_day}_{t_hour}{t_mins}{t_secs}{t_msecs}{self.FileExt}"
+        # 7/9/22 get current time milliseconds to give unique extra where files being imported may have identical timestamp
+        now = datetime.now()
+        n_msecs = now.strftime('%f')
+
+        s = self.FileExt.replace('.','',1) # 7/9/22 added subfolder of filetype
+        self.dest_fpath = f"{path_dest}\\{t_year}\\{t_year}_{t_month}_{t_day}\\{s}\\"
+        self.new_fileName = f"{path_dest}\\{t_year}\\{t_year}_{t_month}_{t_day}\\{s}\\{t_year}_{t_month}_{t_day}_{t_hour}{t_mins}{t_secs}{t_msecs}{n_msecs}{self.FileExt}"
 
         self.FileDate = f'{t_day}/{t_month}/{t_year}'
 

@@ -76,8 +76,8 @@ default_font = tkFont.nametofont("TkDefaultFont")
 default_font.configure(size=12)
 
 #add some version control - need to rememeber to update this!
-lbl = ctk.CTkLabel(window, text="ver 2022_07_13b")
-lbl.config(anchor='e')
+lbl = ctk.CTkLabel(window, text="ver 2022_09_07")
+lbl.configure(anchor='e')
 lbl.grid(column=0, row=0, columnspan=5, sticky='e', padx=1, pady=1, ipadx=1, ipady=1)
 
 #create text for labels
@@ -94,6 +94,7 @@ txt2_text.set(PATH_CARD)
 treeStyle = ttk.Style()
 treeStyle.theme_use("clam")
 treeStyle.configure('Treeview.Heading', background='#5B97D3', foreground='#D5D9DE')
+treeStyle.configure('Treeview', rowheight=35)
 #treeStyle.configure('Treeview.Column', background='blue', foreground='silver')
 
 #now we need to give user the option to choose which files
@@ -121,23 +122,24 @@ myTree.column('file_size', width=100, minwidth=100, anchor='e')
 myTree.column('file_folder', width=275, minwidth=250)
 myTree.column('date_created', width=100, minwidth=75) # make this narrower than default
 
+
 #make checkbox column narrower
 myTree.column('#0',width=50, minwidth=50)
 
 #create the labels - these give updates on progress
 lbl1 = ctk.CTkLabel(window, textvariable=lbl1_text)
-lbl1.config(anchor='w')
+lbl1.configure(anchor='w')
 lbl1.grid(column=0, row=1, columnspan=5, sticky='w', padx=10, pady=10, ipadx=10, ipady=10)
 lbl2 = ctk.CTkLabel(window, textvariable=lbl2_text)
-lbl2.config(anchor='w')
+lbl2.configure(anchor='w')
 lbl2.grid(column=0, row=2, columnspan=5, sticky='w', padx=10, pady=10, ipadx=10, ipady=10)
 
 #create labels next to choose source and destination buttons shwoing current choice (or lack of)
 txt2 = ctk.CTkLabel(window, textvariable=txt2_text)
-txt2.config(anchor='w')
+txt2.configure(anchor='w')
 txt2.grid(column=1, row=3, columnspan=4, sticky='w', padx=10, pady=10, ipadx=10, ipady=10)
 txt1 = ctk.CTkLabel(window, textvariable=txt1_text)
-txt1.config(anchor='w')
+txt1.configure(anchor='w')
 txt1.grid(column=1, row=4, columnspan=4, sticky='w', padx=10, pady=10, ipadx=10, ipady=10)
 
 #Create the buttons (they are fully configured later)
@@ -213,14 +215,14 @@ def checkCardLoc():
             chk2=False
 
     if chk1 and chk2:
-        btn3.config(state='normal')
-        btn4.config(state='normal')
+        btn3.configure(state='normal')
+        btn4.configure(state='normal')
         populateTree(PATH_CARD, PATH_DEST)
         lbl2_text.set(dbchk.dbmsg)
         lbl2.update()
     else:
-        btn3.config(state='disabled')
-        btn4.config(state='disabled')
+        btn3.configure(state='disabled')
+        btn4.configure(state='disabled')
 
 #add methods relating to buttons and treeview
 def populateTree(path_to_files,path_dest):
@@ -404,16 +406,16 @@ myTree.bind('<Double-1>', treeDoubleClick)
 
 #configure the buttons
 btn1 = ctk.CTkButton(window, text="Locate source files", command=getCardLoc)
-btn1.config(state='normal')
+btn1.configure(state=tkinter.NORMAL)
 btn1.grid(column=0, row=3, sticky='ew', padx=10, pady=10, ipadx=10, ipady=10)
 btn2 = ctk.CTkButton(window, text="Locate Destination files", command=getDestLoc)
-btn2.config(state='normal')
+btn2.configure(state='normal')
 btn2.grid(column=0, row=4, sticky='ew', padx=10, pady=10, ipadx=10, ipady=10)
 btn3 = ctk.CTkButton(window, text="Download All files", command=lambda: downloadAllFiles(PATH_CARD))
-btn3.config(state='disabled')
+btn3.configure(state='disabled')
 btn3.grid(column=0, row=9, sticky='ew', padx=10, pady=10, ipadx=10, ipady=10)
 btn4 = ctk.CTkButton(window, text="Download Selected files", command=downloadCheckedFiles)
-btn4.config(state='disabled')
+btn4.configure(state='disabled')
 btn4.grid(column=0, row=8, sticky='ew', padx=10, pady=10, ipadx=10, ipady=10)
 btn5 = ctk.CTkButton(window, text="Close", command=theEnd)
 btn5.grid(column=4, row=10, sticky='ew', padx=10, pady=10, ipadx=10, ipady=10)
